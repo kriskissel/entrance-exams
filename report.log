@@ -1,0 +1,671 @@
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.10.14)  20 APR 2015 22:56
+entering extended mode
+**report.tex
+
+("C:\Users\Kris\Documents\RProjects\Entrance Exams 2014\entrance-exams-april201
+5\report.tex"
+LaTeX2e <2014/05/01>
+Babel <3.9l> and hyphenation patterns for 68 languages loaded.
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\article.cls"
+Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\size10.clo"
+File: size10.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\graphicx.sty"
+Package: graphicx 2014/04/25 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\keyval.sty"
+Package: keyval 2014/05/08 v1.15 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\graphics.sty"
+Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\trig.sty"
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\00miktex\graphics.cfg"
+File: graphics.cfg 2007/01/18 v1.5 graphics configuration of teTeX/TeXLive
+)
+Package graphics Info: Driver file: pdftex.def on input line 91.
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\pdftex-def\pdftex.def"
+File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\infwarerr.sty"
+Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\ltxcmds.sty"
+Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
+)
+\Gread@gobject=\count87
+))
+\Gin@req@height=\dimen103
+\Gin@req@width=\dimen104
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\color.sty"
+Package: color 2014/04/23 v1.1a Standard LaTeX Color (DPC)
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\00miktex\color.cfg"
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package color Info: Driver file: pdftex.def on input line 137.
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\framed\framed.sty"
+Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
+\OuterFrameSep=\skip43
+\fb@frw=\dimen105
+\fb@frh=\dimen106
+\FrameRule=\dimen107
+\FrameSep=\dimen108
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\alltt.sty"
+Package: alltt 1997/06/16 v2.0g defines alltt environment
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\upquote\upquote.sty"
+Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verba
+tim
+)
+("C:\Users\Kris\Documents\RProjects\Entrance Exams 2014\entrance-exams-april201
+5\report.aux")
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 62.
+LaTeX Font Info:    ... okay on input line 62.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 62.
+LaTeX Font Info:    ... okay on input line 62.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 62.
+LaTeX Font Info:    ... okay on input line 62.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 62.
+LaTeX Font Info:    ... okay on input line 62.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 62.
+LaTeX Font Info:    ... okay on input line 62.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 62.
+LaTeX Font Info:    ... okay on input line 62.
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count88
+\scratchdimen=\dimen109
+\scratchbox=\box26
+\nofMPsegments=\count89
+\nofMParguments=\count90
+\everyMPshowfont=\toks15
+\MPscratchCnt=\count91
+\MPscratchDim=\dimen110
+\MPnumerator=\count92
+\makeMPintoPDFobject=\count93
+\everyMPtoPDFconversion=\toks16
+)
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 68.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 68.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 68.
+ [1
+
+{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}]
+Package color Info: Redefining color shadecolor on input line 102.
+
+<figure/histOfLevelsSkipped-1.pdf, id=9, 505.89pt x 289.08pt>
+File: figure/histOfLevelsSkipped-1.pdf Graphic file (type pdf)
+
+<use figure/histOfLevelsSkipped-1.pdf>
+Package pdftex.def Info: figure/histOfLevelsSkipped-1.pdf used on input line 10
+3.
+(pdftex.def)             Requested size: 469.75499pt x 268.43579pt.
+
+Overfull \hbox (18.06749pt too wide) in paragraph at lines 103--104
+[][] 
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [2]
+Package color Info: Redefining color shadecolor on input line 111.
+Package color Info: Redefining color shadecolor on input line 135.
+
+<figure/success-graphs-1.pdf, id=13, 505.89pt x 442.65375pt>
+File: figure/success-graphs-1.pdf Graphic file (type pdf)
+
+<use figure/success-graphs-1.pdf>
+Package pdftex.def Info: figure/success-graphs-1.pdf used on input line 136.
+(pdftex.def)             Requested size: 469.75499pt x 411.04231pt.
+
+Overfull \hbox (18.06749pt too wide) in paragraph at lines 136--137
+[][] 
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [3 <C:/Users/Kris/Documents/RProjects/Entrance Exams 2014/entrance-exams-april
+2015/figure/histOfLevelsSkipped-1.pdf>]
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 140.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 140.
+ [4 <C:/Users/Kris/Documents/RProjects/Entrance Exams 2014/entrance-exams-april
+2015/figure/success-graphs-1.pdf>] [5]
+Package color Info: Redefining color shadecolor on input line 172.
+
+<figure/graphs062-1.pdf, id=41, 578.16pt x 289.08pt>
+File: figure/graphs062-1.pdf Graphic file (type pdf)
+
+<use figure/graphs062-1.pdf>
+Package pdftex.def Info: figure/graphs062-1.pdf used on input line 173.
+(pdftex.def)             Requested size: 469.75499pt x 234.8769pt.
+Package color Info: Redefining color shadecolor on input line 180.
+Package color Info: Redefining color shadecolor on input line 192.
+
+<figure/GPAgraphs062-1.pdf, id=42, 578.16pt x 289.08pt>
+File: figure/GPAgraphs062-1.pdf Graphic file (type pdf)
+
+<use figure/GPAgraphs062-1.pdf>
+Package pdftex.def Info: figure/GPAgraphs062-1.pdf used on input line 193.
+(pdftex.def)             Requested size: 469.75499pt x 234.8769pt.
+
+Overfull \hbox (18.06749pt too wide) in paragraph at lines 193--194
+[][] 
+ []
+
+[6 <C:/Users/Kris/Documents/RProjects/Entrance Exams 2014/entrance-exams-april2
+015/figure/graphs062-1.pdf> <C:/Users/Kris/Documents/RProjects/Entrance Exams 2
+014/entrance-exams-april2015/figure/GPAgraphs062-1.pdf>]
+Package color Info: Redefining color shadecolor on input line 203.
+
+<figure/graphs070-1.pdf, id=58, 578.16pt x 289.08pt>
+File: figure/graphs070-1.pdf Graphic file (type pdf)
+
+<use figure/graphs070-1.pdf>
+Package pdftex.def Info: figure/graphs070-1.pdf used on input line 204.
+(pdftex.def)             Requested size: 469.75499pt x 234.8769pt.
+Package color Info: Redefining color shadecolor on input line 212.
+Package color Info: Redefining color shadecolor on input line 224.
+
+<figure/GPAgraphs070-1.pdf, id=59, 578.16pt x 289.08pt>
+File: figure/GPAgraphs070-1.pdf Graphic file (type pdf)
+
+<use figure/GPAgraphs070-1.pdf>
+Package pdftex.def Info: figure/GPAgraphs070-1.pdf used on input line 225.
+(pdftex.def)             Requested size: 469.75499pt x 234.8769pt.
+
+Overfull \hbox (18.06749pt too wide) in paragraph at lines 225--226
+[][] 
+ []
+
+[7 <C:/Users/Kris/Documents/RProjects/Entrance Exams 2014/entrance-exams-april2
+015/figure/graphs070-1.pdf> <C:/Users/Kris/Documents/RProjects/Entrance Exams 2
+014/entrance-exams-april2015/figure/GPAgraphs070-1.pdf>]
+Package color Info: Redefining color shadecolor on input line 235.
+
+<figure/graphs072-1.pdf, id=76, 578.16pt x 289.08pt>
+File: figure/graphs072-1.pdf Graphic file (type pdf)
+
+<use figure/graphs072-1.pdf>
+Package pdftex.def Info: figure/graphs072-1.pdf used on input line 236.
+(pdftex.def)             Requested size: 469.75499pt x 234.8769pt.
+Package color Info: Redefining color shadecolor on input line 244.
+Package color Info: Redefining color shadecolor on input line 256.
+
+<figure/GPAgraphs072-1.pdf, id=77, 578.16pt x 289.08pt>
+File: figure/GPAgraphs072-1.pdf Graphic file (type pdf)
+
+<use figure/GPAgraphs072-1.pdf>
+Package pdftex.def Info: figure/GPAgraphs072-1.pdf used on input line 257.
+(pdftex.def)             Requested size: 469.75499pt x 234.8769pt.
+
+Overfull \hbox (18.06749pt too wide) in paragraph at lines 257--258
+[][] 
+ []
+
+[8 <C:/Users/Kris/Documents/RProjects/Entrance Exams 2014/entrance-exams-april2
+015/figure/graphs072-1.pdf> <C:/Users/Kris/Documents/RProjects/Entrance Exams 2
+014/entrance-exams-april2015/figure/GPAgraphs072-1.pdf>]
+Package color Info: Redefining color shadecolor on input line 267.
+
+<figure/graphs097-1.pdf, id=93, 578.16pt x 289.08pt>
+File: figure/graphs097-1.pdf Graphic file (type pdf)
+
+<use figure/graphs097-1.pdf>
+Package pdftex.def Info: figure/graphs097-1.pdf used on input line 268.
+(pdftex.def)             Requested size: 469.75499pt x 234.8769pt.
+Package color Info: Redefining color shadecolor on input line 277.
+Package color Info: Redefining color shadecolor on input line 290.
+Package color Info: Redefining color shadecolor on input line 302.
+
+<figure/GPAgraphs097-1.pdf, id=94, 578.16pt x 289.08pt>
+File: figure/GPAgraphs097-1.pdf Graphic file (type pdf)
+
+<use figure/GPAgraphs097-1.pdf>
+Package pdftex.def Info: figure/GPAgraphs097-1.pdf used on input line 303.
+(pdftex.def)             Requested size: 469.75499pt x 234.8769pt.
+
+Overfull \hbox (18.06749pt too wide) in paragraph at lines 303--304
+[][] 
+ []
+
+[9 <C:/Users/Kris/Documents/RProjects/Entrance Exams 2014/entrance-exams-april2
+015/figure/graphs097-1.pdf> <C:/Users/Kris/Documents/RProjects/Entrance Exams 2
+014/entrance-exams-april2015/figure/GPAgraphs097-1.pdf>] [10]
+Package color Info: Redefining color shadecolor on input line 314.
+
+<figure/graphs107-1.pdf, id=113, 578.16pt x 289.08pt>
+File: figure/graphs107-1.pdf Graphic file (type pdf)
+
+<use figure/graphs107-1.pdf>
+Package pdftex.def Info: figure/graphs107-1.pdf used on input line 315.
+(pdftex.def)             Requested size: 469.75499pt x 234.8769pt.
+Package color Info: Redefining color shadecolor on input line 323.
+Package color Info: Redefining color shadecolor on input line 339.
+
+<figure/GPAgraphs107-1.pdf, id=114, 578.16pt x 289.08pt>
+File: figure/GPAgraphs107-1.pdf Graphic file (type pdf)
+
+<use figure/GPAgraphs107-1.pdf>
+Package pdftex.def Info: figure/GPAgraphs107-1.pdf used on input line 340.
+(pdftex.def)             Requested size: 469.75499pt x 234.8769pt.
+
+Overfull \hbox (18.06749pt too wide) in paragraph at lines 340--341
+[][] 
+ []
+
+[11 <C:/Users/Kris/Documents/RProjects/Entrance Exams 2014/entrance-exams-april
+2015/figure/graphs107-1.pdf> <C:/Users/Kris/Documents/RProjects/Entrance Exams 
+2014/entrance-exams-april2015/figure/GPAgraphs107-1.pdf>]
+Package color Info: Redefining color shadecolor on input line 352.
+
+<figure/graphs147-1.pdf, id=130, 578.16pt x 289.08pt>
+File: figure/graphs147-1.pdf Graphic file (type pdf)
+
+<use figure/graphs147-1.pdf>
+Package pdftex.def Info: figure/graphs147-1.pdf used on input line 353.
+(pdftex.def)             Requested size: 469.75499pt x 234.8769pt.
+Package color Info: Redefining color shadecolor on input line 361.
+Package color Info: Redefining color shadecolor on input line 379.
+Package color Info: Redefining color shadecolor on input line 395.
+
+<figure/GPAgraphs147-1.pdf, id=131, 578.16pt x 289.08pt>
+File: figure/GPAgraphs147-1.pdf Graphic file (type pdf)
+
+<use figure/GPAgraphs147-1.pdf>
+Package pdftex.def Info: figure/GPAgraphs147-1.pdf used on input line 396.
+(pdftex.def)             Requested size: 469.75499pt x 234.8769pt.
+
+Overfull \hbox (18.06749pt too wide) in paragraph at lines 396--397
+[][] 
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [12 <C:/Users/Kris/Documents/RProjects/Entrance Exams 2014/entrance-exams-apri
+l2015/figure/graphs147-1.pdf>] [13 <C:/Users/Kris/Documents/RProjects/Entrance 
+Exams 2014/entrance-exams-april2015/figure/GPAgraphs147-1.pdf>]
+Package color Info: Redefining color shadecolor on input line 407.
+
+<figure/graphs141-1.pdf, id=151, 578.16pt x 289.08pt>
+File: figure/graphs141-1.pdf Graphic file (type pdf)
+
+<use figure/graphs141-1.pdf>
+Package pdftex.def Info: figure/graphs141-1.pdf used on input line 408.
+(pdftex.def)             Requested size: 469.75499pt x 234.8769pt.
+Package color Info: Redefining color shadecolor on input line 415.
+Package color Info: Redefining color shadecolor on input line 429.
+Package color Info: Redefining color shadecolor on input line 441.
+
+<figure/GPAgraphs141-1.pdf, id=152, 578.16pt x 289.08pt>
+File: figure/GPAgraphs141-1.pdf Graphic file (type pdf)
+
+<use figure/GPAgraphs141-1.pdf>
+Package pdftex.def Info: figure/GPAgraphs141-1.pdf used on input line 442.
+(pdftex.def)             Requested size: 469.75499pt x 234.8769pt.
+
+Overfull \hbox (18.06749pt too wide) in paragraph at lines 442--443
+[][] 
+ []
+
+[14 <C:/Users/Kris/Documents/RProjects/Entrance Exams 2014/entrance-exams-april
+2015/figure/graphs141-1.pdf> <C:/Users/Kris/Documents/RProjects/Entrance Exams 
+2014/entrance-exams-april2015/figure/GPAgraphs141-1.pdf>] [15]
+Package color Info: Redefining color shadecolor on input line 455.
+
+<figure/graphs142-1.pdf, id=171, 578.16pt x 289.08pt>
+File: figure/graphs142-1.pdf Graphic file (type pdf)
+
+<use figure/graphs142-1.pdf>
+Package pdftex.def Info: figure/graphs142-1.pdf used on input line 456.
+(pdftex.def)             Requested size: 469.75499pt x 234.8769pt.
+Package color Info: Redefining color shadecolor on input line 465.
+Package color Info: Redefining color shadecolor on input line 477.
+
+<figure/GPAgraphs142-1.pdf, id=172, 578.16pt x 289.08pt>
+File: figure/GPAgraphs142-1.pdf Graphic file (type pdf)
+
+<use figure/GPAgraphs142-1.pdf>
+Package pdftex.def Info: figure/GPAgraphs142-1.pdf used on input line 478.
+(pdftex.def)             Requested size: 469.75499pt x 234.8769pt.
+
+Overfull \hbox (18.06749pt too wide) in paragraph at lines 478--479
+[][] 
+ []
+
+[16 <C:/Users/Kris/Documents/RProjects/Entrance Exams 2014/entrance-exams-april
+2015/figure/graphs142-1.pdf> <C:/Users/Kris/Documents/RProjects/Entrance Exams 
+2014/entrance-exams-april2015/figure/GPAgraphs142-1.pdf>]
+Package color Info: Redefining color shadecolor on input line 493.
+
+<figure/graphs151-1.pdf, id=188, 578.16pt x 289.08pt>
+File: figure/graphs151-1.pdf Graphic file (type pdf)
+
+<use figure/graphs151-1.pdf>
+Package pdftex.def Info: figure/graphs151-1.pdf used on input line 494.
+(pdftex.def)             Requested size: 469.75499pt x 234.8769pt.
+Package color Info: Redefining color shadecolor on input line 502.
+Package color Info: Redefining color shadecolor on input line 518.
+
+<figure/GPAgraphs151-1.pdf, id=189, 578.16pt x 289.08pt>
+File: figure/GPAgraphs151-1.pdf Graphic file (type pdf)
+
+<use figure/GPAgraphs151-1.pdf>
+Package pdftex.def Info: figure/GPAgraphs151-1.pdf used on input line 519.
+(pdftex.def)             Requested size: 469.75499pt x 234.8769pt.
+
+Overfull \hbox (18.06749pt too wide) in paragraph at lines 519--520
+[][] 
+ []
+
+[17 <C:/Users/Kris/Documents/RProjects/Entrance Exams 2014/entrance-exams-april
+2015/figure/graphs151-1.pdf> <C:/Users/Kris/Documents/RProjects/Entrance Exams 
+2014/entrance-exams-april2015/figure/GPAgraphs151-1.pdf>] [18]
+Package color Info: Redefining color shadecolor on input line 573.
+
+<figure/062regressiongraph-1.pdf, id=208, 505.89pt x 289.08pt>
+File: figure/062regressiongraph-1.pdf Graphic file (type pdf)
+
+<use figure/062regressiongraph-1.pdf>
+Package pdftex.def Info: figure/062regressiongraph-1.pdf used on input line 574
+.
+(pdftex.def)             Requested size: 469.75499pt x 268.43579pt.
+Package color Info: Redefining color shadecolor on input line 582.
+
+<figure/062residualsplot-1.pdf, id=209, 505.89pt x 289.08pt>
+File: figure/062residualsplot-1.pdf Graphic file (type pdf)
+
+<use figure/062residualsplot-1.pdf>
+Package pdftex.def Info: figure/062residualsplot-1.pdf used on input line 583.
+(pdftex.def)             Requested size: 469.75499pt x 268.43579pt.
+
+Overfull \hbox (18.06749pt too wide) in paragraph at lines 583--584
+[][] 
+ []
+
+[19 <C:/Users/Kris/Documents/RProjects/Entrance Exams 2014/entrance-exams-april
+2015/figure/062regressiongraph-1.pdf> <C:/Users/Kris/Documents/RProjects/Entran
+ce Exams 2014/entrance-exams-april2015/figure/062residualsplot-1.pdf>]
+Package color Info: Redefining color shadecolor on input line 600.
+
+<figure/070regressiongraph-1.pdf, id=226, 505.89pt x 289.08pt>
+File: figure/070regressiongraph-1.pdf Graphic file (type pdf)
+
+<use figure/070regressiongraph-1.pdf>
+Package pdftex.def Info: figure/070regressiongraph-1.pdf used on input line 601
+.
+(pdftex.def)             Requested size: 469.75499pt x 268.43579pt.
+Package color Info: Redefining color shadecolor on input line 606.
+
+<figure/070residualsplot-1.pdf, id=227, 505.89pt x 289.08pt>
+File: figure/070residualsplot-1.pdf Graphic file (type pdf)
+
+<use figure/070residualsplot-1.pdf>
+Package pdftex.def Info: figure/070residualsplot-1.pdf used on input line 607.
+(pdftex.def)             Requested size: 469.75499pt x 268.43579pt.
+
+Overfull \hbox (18.06749pt too wide) in paragraph at lines 607--608
+[][] 
+ []
+
+[20 <C:/Users/Kris/Documents/RProjects/Entrance Exams 2014/entrance-exams-april
+2015/figure/070regressiongraph-1.pdf> <C:/Users/Kris/Documents/RProjects/Entran
+ce Exams 2014/entrance-exams-april2015/figure/070residualsplot-1.pdf>]
+Package color Info: Redefining color shadecolor on input line 623.
+
+<figure/072regressiongraph-1.pdf, id=243, 505.89pt x 289.08pt>
+File: figure/072regressiongraph-1.pdf Graphic file (type pdf)
+
+<use figure/072regressiongraph-1.pdf>
+Package pdftex.def Info: figure/072regressiongraph-1.pdf used on input line 624
+.
+(pdftex.def)             Requested size: 469.75499pt x 268.43579pt.
+Package color Info: Redefining color shadecolor on input line 629.
+
+<figure/072residualsplot-1.pdf, id=244, 505.89pt x 289.08pt>
+File: figure/072residualsplot-1.pdf Graphic file (type pdf)
+
+<use figure/072residualsplot-1.pdf>
+Package pdftex.def Info: figure/072residualsplot-1.pdf used on input line 630.
+(pdftex.def)             Requested size: 469.75499pt x 268.43579pt.
+
+Overfull \hbox (18.06749pt too wide) in paragraph at lines 630--631
+[][] 
+ []
+
+[21 <C:/Users/Kris/Documents/RProjects/Entrance Exams 2014/entrance-exams-april
+2015/figure/072regressiongraph-1.pdf> <C:/Users/Kris/Documents/RProjects/Entran
+ce Exams 2014/entrance-exams-april2015/figure/072residualsplot-1.pdf>]
+Package color Info: Redefining color shadecolor on input line 648.
+
+<figure/097regressiongraph-1.pdf, id=260, 505.89pt x 289.08pt>
+File: figure/097regressiongraph-1.pdf Graphic file (type pdf)
+
+<use figure/097regressiongraph-1.pdf>
+Package pdftex.def Info: figure/097regressiongraph-1.pdf used on input line 649
+.
+(pdftex.def)             Requested size: 469.75499pt x 268.43579pt.
+Package color Info: Redefining color shadecolor on input line 654.
+
+<figure/097residualsplot-1.pdf, id=261, 505.89pt x 289.08pt>
+File: figure/097residualsplot-1.pdf Graphic file (type pdf)
+
+<use figure/097residualsplot-1.pdf>
+Package pdftex.def Info: figure/097residualsplot-1.pdf used on input line 655.
+(pdftex.def)             Requested size: 469.75499pt x 268.43579pt.
+
+Overfull \hbox (18.06749pt too wide) in paragraph at lines 655--656
+[][] 
+ []
+
+[22 <C:/Users/Kris/Documents/RProjects/Entrance Exams 2014/entrance-exams-april
+2015/figure/097regressiongraph-1.pdf> <C:/Users/Kris/Documents/RProjects/Entran
+ce Exams 2014/entrance-exams-april2015/figure/097residualsplot-1.pdf>]
+Package color Info: Redefining color shadecolor on input line 671.
+
+<figure/107regressiongraph-1.pdf, id=277, 505.89pt x 289.08pt>
+File: figure/107regressiongraph-1.pdf Graphic file (type pdf)
+
+<use figure/107regressiongraph-1.pdf>
+Package pdftex.def Info: figure/107regressiongraph-1.pdf used on input line 672
+.
+(pdftex.def)             Requested size: 469.75499pt x 268.43579pt.
+Package color Info: Redefining color shadecolor on input line 677.
+
+<figure/107residualsplot-1.pdf, id=278, 505.89pt x 289.08pt>
+File: figure/107residualsplot-1.pdf Graphic file (type pdf)
+
+<use figure/107residualsplot-1.pdf>
+Package pdftex.def Info: figure/107residualsplot-1.pdf used on input line 678.
+(pdftex.def)             Requested size: 469.75499pt x 268.43579pt.
+
+Overfull \hbox (18.06749pt too wide) in paragraph at lines 678--679
+[][] 
+ []
+
+[23 <C:/Users/Kris/Documents/RProjects/Entrance Exams 2014/entrance-exams-april
+2015/figure/107regressiongraph-1.pdf> <C:/Users/Kris/Documents/RProjects/Entran
+ce Exams 2014/entrance-exams-april2015/figure/107residualsplot-1.pdf>]
+Package color Info: Redefining color shadecolor on input line 695.
+
+<figure/147regressiongraph-1.pdf, id=294, 505.89pt x 289.08pt>
+File: figure/147regressiongraph-1.pdf Graphic file (type pdf)
+
+<use figure/147regressiongraph-1.pdf>
+Package pdftex.def Info: figure/147regressiongraph-1.pdf used on input line 696
+.
+(pdftex.def)             Requested size: 469.75499pt x 268.43579pt.
+Package color Info: Redefining color shadecolor on input line 701.
+
+<figure/147residualsplot-1.pdf, id=295, 505.89pt x 289.08pt>
+File: figure/147residualsplot-1.pdf Graphic file (type pdf)
+
+<use figure/147residualsplot-1.pdf>
+Package pdftex.def Info: figure/147residualsplot-1.pdf used on input line 702.
+(pdftex.def)             Requested size: 469.75499pt x 268.43579pt.
+
+Overfull \hbox (18.06749pt too wide) in paragraph at lines 702--703
+[][] 
+ []
+
+[24 <C:/Users/Kris/Documents/RProjects/Entrance Exams 2014/entrance-exams-april
+2015/figure/147regressiongraph-1.pdf> <C:/Users/Kris/Documents/RProjects/Entran
+ce Exams 2014/entrance-exams-april2015/figure/147residualsplot-1.pdf>]
+Package color Info: Redefining color shadecolor on input line 721.
+
+<figure/141regressiongraph-1.pdf, id=311, 505.89pt x 289.08pt>
+File: figure/141regressiongraph-1.pdf Graphic file (type pdf)
+
+<use figure/141regressiongraph-1.pdf>
+Package pdftex.def Info: figure/141regressiongraph-1.pdf used on input line 722
+.
+(pdftex.def)             Requested size: 469.75499pt x 268.43579pt.
+Package color Info: Redefining color shadecolor on input line 727.
+
+<figure/141residualsplot-1.pdf, id=312, 505.89pt x 289.08pt>
+File: figure/141residualsplot-1.pdf Graphic file (type pdf)
+
+<use figure/141residualsplot-1.pdf>
+Package pdftex.def Info: figure/141residualsplot-1.pdf used on input line 728.
+(pdftex.def)             Requested size: 469.75499pt x 268.43579pt.
+
+Overfull \hbox (18.06749pt too wide) in paragraph at lines 728--729
+[][] 
+ []
+
+[25 <C:/Users/Kris/Documents/RProjects/Entrance Exams 2014/entrance-exams-april
+2015/figure/141regressiongraph-1.pdf> <C:/Users/Kris/Documents/RProjects/Entran
+ce Exams 2014/entrance-exams-april2015/figure/141residualsplot-1.pdf>]
+Package color Info: Redefining color shadecolor on input line 745.
+
+<figure/142regressiongraph-1.pdf, id=329, 505.89pt x 289.08pt>
+File: figure/142regressiongraph-1.pdf Graphic file (type pdf)
+
+<use figure/142regressiongraph-1.pdf>
+Package pdftex.def Info: figure/142regressiongraph-1.pdf used on input line 746
+.
+(pdftex.def)             Requested size: 469.75499pt x 268.43579pt.
+Package color Info: Redefining color shadecolor on input line 751.
+
+<figure/142residualsplot-1.pdf, id=330, 505.89pt x 289.08pt>
+File: figure/142residualsplot-1.pdf Graphic file (type pdf)
+
+<use figure/142residualsplot-1.pdf>
+Package pdftex.def Info: figure/142residualsplot-1.pdf used on input line 752.
+(pdftex.def)             Requested size: 469.75499pt x 268.43579pt.
+
+Overfull \hbox (18.06749pt too wide) in paragraph at lines 752--753
+[][] 
+ []
+
+[26 <C:/Users/Kris/Documents/RProjects/Entrance Exams 2014/entrance-exams-april
+2015/figure/142regressiongraph-1.pdf> <C:/Users/Kris/Documents/RProjects/Entran
+ce Exams 2014/entrance-exams-april2015/figure/142residualsplot-1.pdf>]
+Package color Info: Redefining color shadecolor on input line 768.
+
+<figure/151regressiongraph-1.pdf, id=346, 505.89pt x 289.08pt>
+File: figure/151regressiongraph-1.pdf Graphic file (type pdf)
+
+<use figure/151regressiongraph-1.pdf>
+Package pdftex.def Info: figure/151regressiongraph-1.pdf used on input line 769
+.
+(pdftex.def)             Requested size: 469.75499pt x 268.43579pt.
+Package color Info: Redefining color shadecolor on input line 774.
+
+<figure/151residualsplot-1.pdf, id=347, 505.89pt x 289.08pt>
+File: figure/151residualsplot-1.pdf Graphic file (type pdf)
+
+<use figure/151residualsplot-1.pdf>
+Package pdftex.def Info: figure/151residualsplot-1.pdf used on input line 775.
+(pdftex.def)             Requested size: 469.75499pt x 268.43579pt.
+
+Overfull \hbox (18.06749pt too wide) in paragraph at lines 775--776
+[][] 
+ []
+
+[27 <C:/Users/Kris/Documents/RProjects/Entrance Exams 2014/entrance-exams-april
+2015/figure/151regressiongraph-1.pdf> <C:/Users/Kris/Documents/RProjects/Entran
+ce Exams 2014/entrance-exams-april2015/figure/151residualsplot-1.pdf>]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 790.
+
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\omscmr.fd"
+File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 790.
+
+Overfull \hbox (9.03836pt too wide) in paragraph at lines 793--794
+[]\OT1/cmr/bx/n/10 Course.taken \OT1/cmr/m/n/10 - In-di-cates the math course: 
+MATH062 is Arith-metic, MATH070 is Pre-al-ge-bra, MATH072
+ []
+
+[28]
+Package color Info: Redefining color shadecolor on input line 838.
+LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10> not available
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 840.
+LaTeX Font Info:    Try loading font information for OMS+cmtt on input line 850
+.
+ (C:/PROGRA~1/R/R-31~1.1/share/texmf/tex/latex\omscmtt.fd
+File: omscmtt.fd 
+)
+LaTeX Font Info:    Font shape `OMS/cmtt/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 850.
+Package color Info: Redefining color shadecolor on input line 870.
+ [29] [30]
+("C:\Users\Kris\Documents\RProjects\Entrance Exams 2014\entrance-exams-april201
+5\report.aux") ) 
+Here is how much of TeX's memory you used:
+ 1499 strings out of 493705
+ 23625 string characters out of 3142154
+ 78696 words of memory out of 3000000
+ 4798 multiletter control sequences out of 15000+200000
+ 8409 words of font info for 30 fonts, out of 3000000 for 9000
+ 1025 hyphenation exceptions out of 8191
+ 27i,6n,19p,1692b,275s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/
+cm/cmbx10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
+/cmbx12.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/c
+mmi10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmm
+i7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.
+pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb
+><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><C
+:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Pr
+ogram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Prog
+ram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Progra
+m Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on report.pdf (30 pages, 368576 bytes).
+PDF statistics:
+ 408 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 500000)
+ 191 words of extra memory for PDF output out of 10000 (max. 10000000)
+
