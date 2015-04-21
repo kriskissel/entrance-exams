@@ -1,0 +1,962 @@
+% !Rnw weave = knitr
+\documentclass[twoside]{article}
+
+\setlength{\topmargin}{-.5in}
+\setlength{\textheight}{9in}
+\setlength{\textwidth}{6.5in}
+\setlength{\headheight}{26pt}
+\setlength{\headsep}{2pt}
+\setlength{\oddsidemargin}{0.25in}
+\setlength{\evensidemargin}{-0.25in}
+\setlength{\parindent}{0.25in}
+
+\begin{document}
+
+\title{Entrance Exam Placement Analysis}
+\author{Kris Kissel}
+
+
+\maketitle
+
+
+\bigskip
+
+This is an analysis of student performance in math courses at Green River College based on whether they were placed into those courses by the Entrance Exams developed by faculty at the school.  The primary purpose of the analysis is to advise the mathematics faculty of the college on whether the placement by Entrance Exams is working well in comparison to other placement mechanisms.
+
+\section{Abstract}
+
+The Mathematics Division at Green River College has put in place several options for entering students trying to find their appropriate placement into math classes.  All incoming students take the computerized COMPASS placement test, a commercial tool employed by many schools, to identify a student's initial placement.  Students who believe that they have been placed below their true ability level by this assessment then have several options to try to improve their placement: If they have taken classes from another college, they can transfer in their credits; if they have recently graduated from one of several local school districts in the GRCC vicinity, they can ask the college to evaluate their high school transcript to identify the appropriate placement; and if a student knows exactly which math course he or she wishes to take, the student may elect to take a computerized Entrance Exam designed locally by the college faculty to test mastery of prerequisite material for that course.  Entrance Exams are available for all developmental (i.e. precollege-level) math classes, all college-level math classes that do not have a college-level prerequisite, as well as second-quarter precalculus and first-quarter calculus.  This study examines the performance of students placed by Entrance Exams in comparison to those who are placed by other methods.  
+
+
+\section{Summary of Results}
+
+In every course analyzed, the success rates for students (as defined in the next section) was either greater for students who were placed by the locally-designed Entrance Exams compared to the success rate for students placed by other means, or the success rate was lower but the difference was too small to be considered statistically significant.  Students who gained entry to math courses via the Entrance Exams did appear to have stronger overall academic performaces, as measured by their concurrent GPA in the same quarter, suggesting that because the Entrance Exams are optional, they might be attracting students who tend to have stronger academic abilities than the general population.  This implies that these success rates might not extend to the entire student population if the Entrance Exams were to become the primary tool for placement.  Nonetheless, the strong success rates indicate that the Entrance Exams are working as desired.  Additionally, there is some evidence to suggest that the cutoff scores for passing the Entrance Exams might even be lowered somewhat without sacrificing success rates.
+
+
+\section{Analysis}
+
+\Sexpr{
+df1 = read.csv("cleandata/preprocessedData.csv")
+}
+
+<<numbersOfStudents, echo=FALSE>>=
+MAPSlevel = function(score){
+  if (is.na(score)) return(NA)
+  if (score >= 80 & score < 100) return (1)
+  if (score >= 180 & score < 200) return (2)
+  if (score >= 280 & score < 300) return (3)
+  if (score >= 380 & score < 400) return (4)
+  if (score >= 475 & score < 500) return (5)
+  if (score >= 575 & score < 600) return (6)
+  if (score >= 675 & score < 700) return (7)
+  return(NA)
+}
+
+COMPASSlevel = function(numberSkills,elemAlg,collegeAlg,trig){
+  if (!is.na(trig) & trig >= 51) return(7)
+  if (!is.na(trig) & trig >= 0) return(6)
+  if (!is.na(collegeAlg) & collegeAlg >= 75) return(6)
+  if (!is.na(collegeAlg) & collegeAlg >= 26) return(5)
+  if (!is.na(elemAlg) & elemAlg >= 86) return(5)
+  if (!is.na(elemAlg) & elemAlg >= 60) return(4)
+  if (!is.na(elemAlg) & elemAlg >= 26) return(3)
+  if (!is.na(numberSkills) & numberSkills >= 86) return(3)
+  if (!is.na(numberSkills) & numberSkills >= 51) return(2)
+  if (!is.na(numberSkills) & numberSkills >= 31) return(1)
+  if (!is.na(numberSkills) & numberSkills >= 0) return(0)
+  return(NA)
+}
+
+df1$COMPASS.placement = numeric(length(df1$FID))
+df1$MAPS.placement = numeric(length(df1$FID))
+
+for (i in 1:length(df1[,1])){
+  z = COMPASSlevel(df1$COMPASS.Number.Skills[i],df1$COMPASS.Elem.Alg[i],df1$COMPASS.College.Alg[i],df1$COMPASS.Trig[i])
+  if (!is.null(z))  {df1$COMPASS.placement[i] = z} else {df1$COMPASS.placement[i] = NA}
+}
+for (i in 1:length(df1[,1])){
+  z = MAPSlevel(df1$MAPS.score[i])
+  if (!is.null(z))  {df1$MAPS.placement[i] = z} else {df1$MAPS.placement[i] = NA}
+}
+df1$levels.skipped = df1$MAPS.placement-df1$COMPASS.placement
+
+levelsSkipped.withoutOvercounting = c()
+levelsSkipped.FIDs = c()
+for (i in 1:length(df1[,1])){
+  if (!(df1$FID[i] %in% levelsSkipped.FIDs)){
+    levelsSkipped.FIDs = c(levelsSkipped.FIDs, df1$FID[i])
+    if (!is.na(df1$levels.skipped[i])){
+      levelsSkipped.withoutOvercounting = c(levelsSkipped.withoutOvercounting, df1$levels.skipped[i]) 
+    }
+  }
+}
+
+meanNumberOfLevelsSkipped = mean(levelsSkipped.withoutOvercounting)
+numberSuccessfullyPlacedByMAPS=length(levelsSkipped.withoutOvercounting)
+numberInStudy = length(levelsSkipped.FIDs)
+percentPlacedByMAPS = numberSuccessfullyPlacedByMAPS/numberInStudy
+@
+
+There are a number of ways to try to define student success in math classes.  For the purposes of this analysis, we mostly (see the exceptions described in the next paragraph) define a student's performance as successful if he or she earnes the grade necessary to take the following course in the sequence.  For example, a grade of 2.5 (on a 4.0-scale) in Elementary Algebra is the prerequisite for enrollment in Intermediate Algebra, so we categorize an Elementary Algebra student as successful if he or she earns a grade of 2.5 or higher.  The success rate for a group of students in a particular course is then defined to be the percentage of the group who are successful.  
+
+There are, however, a few complications with this definition of student success.  One of the courses in the study, Math In Society, is a terminal course and is not a prerequisite for any other course; for this course, student success is defined as meeting a grade of 1.0 or better, since that is sufficient to earn college credit for the course and thereby satisfy a mathematics requirement for an Associate in Arts degree.  Similarly, although Precalculus 1 and Finite Math for Business and Social Science are prerequisites for other classes, many students take these as terminal courses, intending only to earn credit and satisfy a mathematics requirement for their degree; because different subsets of students in these courses have different goals, we choose to report both the success rate at the 1.0-level (for earning college credit) and at the 2.0-level (for entrance into the next course in the sequence).  Intermediate Algebra is the final developmental-level mathematics course offered at the college, and after this course there are several pathways for college-level mathematics courses from which students may choose: Precaclculus 1, Number Theory for Elementary School Teachers, Finite Math for Business and Social Science, and Math in Society.   Futheremore, the prerequiste grade for admission into the next course depends which sequence a student selects: the prerequisite grade in Intermediate Algebra for entrance into Precalculus 1 or Number Theory for Elementary School Teachers is 2.5, while a grade of 2.0 suffices for the other tracks.  So, as with some of the other courses, we report here success rates for the two relevant cutoff grades, 2.0 and 2.5.
+
+Students who withdrew from a course, earned an Incomplete or No-Credit grade were not considered successful; students who earned a Pass grade were only considered successful at the 1.0-grade-point level.
+
+In this study, we examine student grades earned in the 14 academic quarters beginning Summer 2010 and ending Fall 2013 (these are all the quarters for which data was available when this study was initiated).  We examined all grades earned during this period in the math classes under consideration, for a total of \Sexpr{length(df1$FID)} student grades attained by \Sexpr{numberInStudy} individual students.  The data was obtained from the Washington State Board for Community and Technical Colleges data warehouse, via the GRC office of Institutional Excellence.  (Important Disclosure: The author of this study is a faculty member in the GRC Mathematics Division but was not involved in the development of the Entrance Exams.)
+
+Approximately \Sexpr{round(100*percentPlacedByMAPS,1)}\% of the \Sexpr{numberInStudy} students in this study obtained math course placement via the college's custom Entrance Exams.  Of those students, the mean number of course levels skipped by taking and passing an Entrance Exam instead of settling for their COMPASS placement was \Sexpr{round(mean(levelsSkipped.withoutOvercounting),2)} levels.  One student even managed to skip \Sexpr{max(levelsSkipped.withoutOvercounting)} levels.  This histrogram illustrates the difference in the number of course levels between students' Entrance Exam placement and his or her COMPASS placement. Notice that there were a few students for whom the difference was negative; because students can use the higher of the two plecement recommendations, no student was actually placed lower as a result of the Entrance Exam.
+
+<<histOfLevelsSkipped, echo=FALSE, fig.height=4>>=
+hist(levelsSkipped.withoutOvercounting, col="green", xlab="Entrance Exam Placement Level Minus COMPASS Exam Placement Level", main="Difference in Placement Levels")
+@
+
+
+The following table lists the major results of the study.  LEGEND: The first column of each line indicates the course name and the relevant cutoff grade (on a 4.0 scale); EESR is the success rate of students placed by the Entrance Exams, reported as a percent; OSR is the success rate of other students; \#EE is the number of students attempting placement by the corresponding Entrance Exam, and \#O is the number of students placed by other means.  The listed P-value for each class corresponds to an exact binomal test applied to the counts of successful and unsuccessful students placed by Entrance Exams; we use the success rates of students in the corresponding course placed by other means as the parameter for the binomial distribution.
+
+<<success-tables, echo=FALSE>>=
+success2.5table = function(dataframe, course, examfield, cutofffloor, cutoffceiling){
+  tookcourse = subset(dataframe, Course.taken==course)
+  tookcourseandpassedMAPS = subset(dataframe, examfield >= cutofffloor & examfield < cutoffceiling)
+  tookcoursenoMAPS = subset(tookcourse, is.na(examfield) | ((examfield >= cutoffceiling) | (examfield < cutofffloor)))
+  counts1=table(tookcoursenoMAPS$success2.5)
+  counts2=table(tookcourseandpassedMAPS$success2.5)
+  success2.5comparisontable=rbind(counts2, counts1)
+  rownames(success2.5comparisontable)=c("MAPS-placed","other")
+  return(success2.5comparisontable)
+}
+
+success2.0table = function(dataframe, course, examfield, cutofffloor, cutoffceiling){
+  tookcourse = subset(dataframe, Course.taken==course)
+  tookcourseandpassedMAPS = subset(dataframe, examfield >= cutofffloor & examfield < cutoffceiling)
+  tookcoursenoMAPS = subset(tookcourse, is.na(examfield) | ((examfield >= cutoffceiling) | (examfield < cutofffloor)))
+  counts1=table(tookcoursenoMAPS$success2.0)
+  counts2=table(tookcourseandpassedMAPS$success2.0)
+  success2.0comparisontable=rbind(counts2, counts1)
+  rownames(success2.0comparisontable)=c("MAPS-placed","other")
+  return(success2.0comparisontable)
+}
+
+success1.0table = function(dataframe, course, examfield, cutofffloor, cutoffceiling){
+  tookcourse = subset(dataframe, Course.taken==course)
+  tookcourseandpassedMAPS = subset(dataframe, examfield >= cutofffloor & examfield < cutoffceiling)
+  tookcoursenoMAPS = subset(tookcourse, is.na(examfield) | ((examfield >= cutoffceiling) | (examfield < cutofffloor)))
+  counts1=table(tookcoursenoMAPS$success1.0)
+  counts2=table(tookcourseandpassedMAPS$success1.0)
+  success1.0comparisontable=rbind(counts2, counts1)
+  rownames(success1.0comparisontable)=c("MAPS-placed","other")
+  return(success1.0comparisontable)
+}
+
+produceTableRow = function(successtable){
+  MapsNumberOfStudents = successtable[1,1]+successtable[1,2]
+  MapsSuccessRate = 100*successtable[1,2]/MapsNumberOfStudents
+  OtherNumberOfStudents = successtable[2,1]+successtable[2,2]
+  OtherSuccessRate = 100*successtable[2,2]/OtherNumberOfStudents
+  pValue = round(suppressWarnings(chisq.test(successtable))$p.value, digits=3)
+  binompValue = round(binom.test(x=successtable[1,2],n=MapsNumberOfStudents,p=OtherSuccessRate/100, 
+                                 alternative="two.sided")$p.value, digits=3)
+  result = c(MapsSuccessRate,OtherSuccessRate, MapsNumberOfStudents,
+             OtherNumberOfStudents, binompValue)
+  return(result)
+}
+
+m62row = produceTableRow(success2.5table(df1, "MATH062", df1$MAPS.score, 80, 100))
+m70row = produceTableRow(success2.5table(df1, "MATH070", df1$MAPS.score, 180, 200))
+m72row = produceTableRow(success2.5table(df1, "MATH072", df1$MAPS.score, 280, 300))
+m97row2.0 = produceTableRow(success2.0table(df1, "MATH097", df1$MAPS.score, 380, 400))
+m97row2.5 = produceTableRow(success2.5table(df1, "MATH097", df1$MAPS.score, 380, 400))
+m107row = produceTableRow(success1.0table(df1, "MATH&107", df1$MAPS.score, 475, 500))
+m147row1.0 = produceTableRow(success1.0table(df1, "MATH147", df1$MAPS.score, 475, 500))
+m147row2.0 = produceTableRow(success2.0table(df1, "MATH147", df1$MAPS.score, 475, 500))
+m141row1.0 = produceTableRow(success1.0table(df1, "MATH&141", df1$MAPS.score, 480, 500))
+m141row2.0 = produceTableRow(success2.0table(df1, "MATH&141", df1$MAPS.score, 480, 500))
+m142row = produceTableRow(success2.0table(df1, "MATH&142", df1$MAPS.score, 575, 600))
+m151row = produceTableRow(success2.0table(df1, "MATH&151", df1$MAPS.score, 675, 700))
+
+
+resultsTable = data.frame(rbind(m62row, m70row, m72row, m97row2.0, m97row2.5, m107row, m147row1.0, m147row2.0, m141row1.0, m141row2.0, m142row, m151row))
+names(resultsTable) = c("EESR (%)","OSR (%)", "#EE", "#O", "P-Value")
+row.names(resultsTable) = c("Arithmetic (2.5)", "Prealgebra (2.5)", "Elementary Algebra (2.5)", "Intermediate Algebra (2.0)", "Intermediate Algebra (2.5)", "Math In Society (1.0)", "Finite Math (1.0)", "Finite Math (2.0)", "Precalculus 1 (1.0)", "Precalculus 1 (2.0)", "Precalculus 2 (2.0)", "Calculus 1 (2.0)")
+print(resultsTable)
+@
+
+
+This graph illustrates the success rates listed in the table above.
+
+
+<<success-graphs, echo=FALSE, fig.height=6.125>>=
+ratesTable = t(data.matrix(resultsTable[,c(1,2)]))
+par(mar=c(15,5,5,1))
+barplot(ratesTable, beside = TRUE, las=2, ylab="Success Rate (%)", col=c("darkblue", "red"), legend=c("Entrance-Exam Placement", "Other Placement"), ylim = c(0,120), axes = FALSE, main = "Comparison of Students Success Rates by Placement Method")
+axis(2, at=c(0, 20, 40, 60, 80, 100))
+@
+
+The only statistically significant difference in success rates occurred in the Calculus 1 course, and the success rate there was {\it higher} for students placed by into that course by an Entrance Exams compared to those placed by other means.  (The p-value seen in the Finite Math group should not be considered significant because of the multiple-testing effect.  If we use a standard significance level of $\alpha = 0.05$ for this study of 12 hypotheses, then the Bonferroni correction for multiple testing suggests that the cutoff value for significance in each individual comparison should be $\frac{0.05}{12} \approx 0.004$.)
+
+
+Taken together, these results suggest that across all levels, the Entrance Exams do no worse in placing the population of students who elect to take them than other placement mechanisms available at the college.
+
+
+\section{Grade Distributions}
+
+An important question to ask here is whether the population of students who opt to take an Entrance Exam is somehow fundamentally different from the population of students who don't.  That is to say, if the success rates differ, are there counfounding variables that could account for this?  For example, is it possible that students who chose to take an extra test happen to have stonger academic skills to begin with?  We explore several aspects of the available data to try to answer this question.
+
+The following subsections includes graphs that illustrate the distributions of grades for students placed by Entrance Exams and those placed by other means.  In each histogram, the far-left bar represents the combined tally of the non-numerical grades earned: W (withdrawal), I (Incomplete), NC (No Credit) and N (audit); the non-numerical grades P (Pass) are included in the tally with numerical grades of 1.0.
+
+We also examine students' concurrent GPA.  It would seem ideal if we could look only at their GPA in other (non-math) classes, since the overall GPA in a given quarter is of course correlated with the performance in the math class taken at that time; however, it is not possible to extract a grade-point average in their other classes from the information available, because there is no way to determine how many credits we should be dividing by in order to compute the average.  We would need to know the actual grades earned in the other courses.  For example, it makes a difference if a student withdrew form another class rather than earning a 0.0 in it, because that affects the process of the grade-point calculation (credits corresponding to classes from which a student withdraws are not used in computing the average); however that information is not available in this data set.  We will therefore be satisfied with examining the students' overall concurrent GPA while enrolled in a math class, including the math grades.
+
+It is worth noting that, in every course, the mean concurrent GPA was greater among the Entrance-Exam placed students than for other students.  In several of these courses, the difference was statistically significant.  This suggests that there may be a difference in overall academic abilities between students who opt to take an Entrance Exam and those who don't, a possible confounding variable that makes it difficult to predict what would happen with the success rates if the current system of using Entrance Exams as an optional secondary mechanism for placement were to be substantially altered in the future.
+
+
+
+
+
+<<make-graphs-and-tables, echo=FALSE>>=
+makegraphs = function(dataframe, course, cutofffloor, cutoffceiling){
+  bins = (-2:40)/10.0
+  par(mfrow=c(1,2))
+  tookcourse = subset(dataframe, Course.taken==course)
+  tookcourseandpassedMAPS = subset(dataframe, MAPS.score >= cutofffloor & MAPS.score < cutoffceiling)
+  hist(tookcourseandpassedMAPS$forcednumericalgrade, breaks=bins, col="green",
+       main="Entrance-Exam-Placed Students",
+       xlab="Course Grade", cex.main=0.75)
+  tookcoursenoMAPS = subset(tookcourse, is.na(MAPS.score) | ((MAPS.score >= cutoffceiling) | (MAPS.score < cutofffloor)))
+  hist(tookcoursenoMAPS$forcednumericalgrade, breaks=bins, col="red",
+       main="Other Students",
+       xlab="Course Grade", cex.main=0.75)
+  mtext(paste("Grades Earned in ", course, sep=""), side=3, outer=TRUE, line=-1, cex=1.25)
+}
+
+
+maketables1.0 = function(dataframe, course, cutofffloor, cutoffceiling, proportions = TRUE){
+  tookcourse = subset(dataframe, Course.taken==course)
+  tookcourseandpassedMAPS = subset(dataframe, MAPS.score >= cutofffloor & MAPS.score < cutoffceiling)
+  z = table(tookcourseandpassedMAPS$success1.0, tookcourseandpassedMAPS$MAPS.score)
+  rownames(z) = c("Unsuccessful", "Successful")
+  if (proportions == TRUE) {
+    print(round(100*prop.table(z, margin = 2), digits=1))
+  }
+  else {
+    print(z)
+  }
+}
+
+maketables2.0 = function(dataframe, course, cutofffloor, cutoffceiling, proportions = TRUE){
+  tookcourse = subset(dataframe, Course.taken==course)
+  tookcourseandpassedMAPS = subset(dataframe, MAPS.score >= cutofffloor & MAPS.score < cutoffceiling)
+  z = table(tookcourseandpassedMAPS$success2.0, tookcourseandpassedMAPS$MAPS.score)
+  rownames(z) = c("Unsuccessful", "Successful")
+  if (proportions == TRUE) {
+    print(round(100*prop.table(z, margin = 2), digits=1))
+  }
+  else {
+    print(z)
+  }
+}
+
+maketables2.5 = function(dataframe, course, cutofffloor, cutoffceiling, proportions = TRUE){
+  tookcourse = subset(dataframe, Course.taken==course)
+  tookcourseandpassedMAPS = subset(dataframe, MAPS.score >= cutofffloor & MAPS.score < cutoffceiling)
+  z = table(tookcourseandpassedMAPS$success2.5, tookcourseandpassedMAPS$MAPS.score)
+  rownames(z) = c("Unsuccessful", "Successful")
+  if (proportions == TRUE) {
+    print(round(100*prop.table(z, margin = 2), digits=1))
+  }
+  else {
+    print(z)
+  }
+}
+@
+
+
+
+<<concurrentGPA, echo=FALSE>>=
+makeGPAgraphs = function(dataframe, course, cutofffloor, cutoffceiling){
+  par(mfrow=c(1,2))
+  tookcourse = subset(dataframe, Course.taken==course)
+  tookcourseandpassedMAPS = subset(dataframe, MAPS.score >= cutofffloor & MAPS.score < cutoffceiling)
+  hist(tookcourseandpassedMAPS$Concurrent.GPA, col="yellow",
+       main="Entrance-Exam-Placed Students",
+       xlab="Concurrent GPA", cex.main=0.75)
+  tookcoursenoMAPS = subset(tookcourse, is.na(MAPS.score) | ((MAPS.score >= cutoffceiling) | (MAPS.score < cutofffloor)))
+  hist(tookcoursenoMAPS$Concurrent.GPA, col="blue",
+       main="Other Students",
+       xlab="Concurrent GPA", cex.main=0.75)
+  mtext(paste("Concurrent GPA for Students in ", course, sep=""), side=3, outer=TRUE, line=-1, cex=1.25)
+}
+
+ttestGPA = function(dataframe, course, cutofffloor, cutoffceiling){
+  tookcourse = subset(dataframe, Course.taken==course)
+  tookcourseandpassedMAPS = subset(dataframe, MAPS.score >= cutofffloor & MAPS.score < cutoffceiling)
+  tookcoursenoMAPS = subset(tookcourse, is.na(MAPS.score) | ((MAPS.score >= cutoffceiling) | (MAPS.score < cutofffloor)))
+  t.test(tookcourseandpassedMAPS$Concurrent.GPA, tookcoursenoMAPS$Concurrent.GPA)
+}
+  
+@
+
+
+
+\newpage
+\subsection{MATH062 - Arithmetic}
+
+<<graphs062, echo=FALSE, fig.width=8, fig.height=4>>=
+makegraphs(df1, "MATH062", 80, 100)
+@
+
+Student Success Rates at the 2.5 Grade-Point Level (\%) by Entrance Exam score:
+
+<<062tables1, echo=FALSE>>=
+maketables2.5(df1, "MATH062", 80, 100, proportions = TRUE)
+@
+
+
+<<GPAgraphs062, echo=FALSE, fig.width=8, fig.height=4>>=
+makeGPAgraphs(df1, "MATH062", 80, 100)
+z=ttestGPA(df1, "MATH062", 80, 100)
+@
+
+The mean concurrent GPA of students who were placed by Entrance Exam is \Sexpr{round(z$estimate[1],2)}, and the mean concurrent GPA of students placed by other means is \Sexpr{round(z$estimate[2],2)}.  A T-test of the null hypothesis that the mean concurrent GPA is the same for both groups produces a P-value of \Sexpr{round(z$p.value,3)}.
+
+\newpage
+\subsection{MATH070 - Pre-Algebra}
+
+<<graphs070, fig.width=8, fig.height=4, echo=FALSE>>=
+makegraphs(df1, "MATH070", 180, 200)
+@
+
+
+Student Success Rates  at the 2.5 Grade-Point Level (\%) by Entrance Exam Score:
+
+<<070tables1, echo=FALSE>>=
+maketables2.5(df1, "MATH070", 180, 200, proportions = TRUE)
+@
+
+
+<<GPAgraphs070, echo=FALSE, fig.width=8, fig.height=4>>=
+makeGPAgraphs(df1, "MATH070", 180, 200)
+z=ttestGPA(df1, "MATH070", 180, 200)
+@
+
+The mean concurrent GPA of students who were placed by Entrance Exam is \Sexpr{round(z$estimate[1],2)}, and the mean concurrent GPA of students placed by other means is \Sexpr{round(z$estimate[2],2)}.  A T-test of the null hypothesis that the mean concurrent GPA is the same for both groups produces a P-value of \Sexpr{round(z$p.value,3)}.
+
+\newpage
+\subsection{MATH072 - Elementary Algebra}
+
+<<graphs072, fig.width=8, fig.height=4, echo=FALSE>>=
+makegraphs(df1, "MATH072", 280, 300)
+@
+
+
+Student Success Rates  at the 2.5 Grade-Point Level (\%) by Entrance Exam Score:
+
+<<072tables1, echo=FALSE>>=
+maketables2.5(df1, "MATH072", 280, 300, proportions = TRUE)
+@
+
+
+<<GPAgraphs072, echo=FALSE, fig.width=8, fig.height=4>>=
+makeGPAgraphs(df1, "MATH072", 280, 300)
+z=ttestGPA(df1, "MATH072", 280, 300)
+@
+
+The mean concurrent GPA of students who were placed by Entrance Exam is \Sexpr{round(z$estimate[1],2)}, and the mean concurrent GPA of students placed by other means is \Sexpr{round(z$estimate[2],2)}.  A T-test of the null hypothesis that the mean concurrent GPA is the same for both groups produces a P-value of \Sexpr{round(z$p.value,3)}.
+
+\newpage
+\subsection{MATH097 - Intermediate Algebra}
+
+<<graphs097, fig.width=8, fig.height=4, echo=FALSE>>=
+makegraphs(df1, "MATH097", 380, 400)
+@
+
+
+
+Student Success Rates  at the 2.5 Grade-Point Level (\%) by Entrance Exam Score:
+
+<<097table1, echo=FALSE>>=
+maketables2.5(df1, "MATH097", 380, 400, proportions = TRUE)
+@
+
+Student Success Rates  at the 2.0 Grade-Point Level (\%) by Entrance Exam Score:
+
+<<097table3, echo=FALSE>>=
+maketables2.0(df1, "MATH097", 380, 400, proportions = TRUE)
+@
+
+
+<<GPAgraphs097, echo=FALSE, fig.width=8, fig.height=4>>=
+makeGPAgraphs(df1, "MATH097", 380, 400)
+z=ttestGPA(df1, "MATH097", 380, 400)
+@
+
+The mean concurrent GPA of students who were placed by Entrance Exam is \Sexpr{round(z$estimate[1],2)}, and the mean concurrent GPA of students placed by other means is \Sexpr{round(z$estimate[2],2)}.  A T-test of the null hypothesis that the mean concurrent GPA is the same for both groups produces a P-value of \Sexpr{round(z$p.value,3)}.
+
+
+\newpage
+\subsection{MATH\&107 - Math in Society}
+
+<<graphs107,fig.width=8, fig.height=4, echo=FALSE>>=
+makegraphs(df1, "MATH&107", 475, 500)
+@
+
+
+Student Success Rates  at the 1.0 Grade-Point Level (\%) by Entrance Exam Score:
+
+<<107table1, echo=FALSE>>=
+maketables1.0(df1, "MATH062", 475, 500, proportions = TRUE)
+@
+
+
+<<GPAgraphs107, echo=FALSE, fig.width=8, fig.height=4>>=
+makeGPAgraphs(df1, "MATH&107", 475, 500)
+z=ttestGPA(df1, "MATH&107", 475, 500)
+@
+
+The mean concurrent GPA of students who were placed by Entrance Exam is \Sexpr{round(z$estimate[1],2)}, and the mean concurrent GPA of students placed by other means is \Sexpr{round(z$estimate[2],2)}.  A T-test of the null hypothesis that the mean concurrent GPA is the same for both groups produces a P-value of \Sexpr{round(z$p.value,3)}.
+
+
+
+\newpage
+\subsection{MATH147 - Finite Math for Business and Social Science}
+
+<<graphs147, fig.width=8, fig.height=4, echo=FALSE>>=
+makegraphs(df1, "MATH147", 475, 500)
+@
+
+
+Student Success Rates  at the 1.0 Grade-Point Level (\%) by Entrance Exam Score:
+
+<<147table1, echo=FALSE>>=
+maketables1.0(df1, "MATH147", 475, 500, proportions = TRUE)
+@
+
+
+Student Success Rates  at the 2.0 Grade-Point Level (\%) by Entrance Exam Score:
+
+<<147table3, echo=FALSE>>=
+maketables2.0(df1, "MATH147", 475, 500, proportions = TRUE)
+@
+
+
+<<GPAgraphs147, echo=FALSE, fig.width=8, fig.height=4>>=
+makeGPAgraphs(df1, "MATH147", 475, 500)
+z=ttestGPA(df1, "MATH147", 475, 500)
+@
+
+The mean concurrent GPA of students who were placed by Entrance Exam is \Sexpr{round(z$estimate[1],2)}, and the mean concurrent GPA of students placed by other means is \Sexpr{round(z$estimate[2],2)}.  A T-test of the null hypothesis that the mean concurrent GPA is the same for both groups produces a P-value of \Sexpr{round(z$p.value,3)}.
+
+
+\newpage
+\subsection{MATH\&141 - Precalculus 1}
+
+<<graphs141, fig.width=8, fig.height=4, echo=FALSE>>=
+makegraphs(df1, "MATH&141", 480, 500)
+@
+
+Student Success Rates  at the 1.0 Grade-Point Level (\%) by Entrance Exam Score:
+
+<<141table1, echo=FALSE>>=
+maketables1.0(df1, "MATH&147", 480, 500, proportions = TRUE)
+@
+
+
+Student Success Rates  at the 2.0 Grade-Point Level (\%) by Entrance Exam Score:
+
+<<141table3, echo=FALSE>>=
+maketables2.0(df1, "MATH&141", 480, 500, proportions = TRUE)
+@
+
+
+<<GPAgraphs141, echo=FALSE, fig.width=8, fig.height=4>>=
+makeGPAgraphs(df1, "MATH&141", 480, 500)
+z=ttestGPA(df1, "MATH&141", 480, 500)
+@
+
+The mean concurrent GPA of students who were placed by Entrance Exam is \Sexpr{round(z$estimate[1],2)}, and the mean concurrent GPA of students placed by other means is \Sexpr{round(z$estimate[2],2)}.  A T-test of the null hypothesis that the mean concurrent GPA is the same for both groups produces a P-value of \Sexpr{round(z$p.value,3)}.
+
+
+
+\newpage
+\subsection{MATH\&142 - Precalculus 2}
+
+
+<<graphs142, fig.width=8, fig.height=4, echo=FALSE>>=
+makegraphs(df1, "MATH&142", 575, 600)
+@
+
+
+
+Student Success Rates  at the 2.0 Grade-Point Level (\%) by Entrance Exam Score:
+
+<<142table1, echo=FALSE>>=
+maketables2.0(df1, "MATH&142", 575, 600, proportions = TRUE)
+@
+
+
+<<GPAgraphs142, echo=FALSE, fig.width=8, fig.height=4>>=
+makeGPAgraphs(df1, "MATH&142", 575, 600)
+z=ttestGPA(df1, "MATH&142", 575, 600)
+@
+
+The mean concurrent GPA of students who were placed by Entrance Exam is \Sexpr{round(z$estimate[1],2)}, and the mean concurrent GPA of students placed by other means is \Sexpr{round(z$estimate[2],2)}.  A T-test of the null hypothesis that the mean concurrent GPA is the same for both groups produces a P-value of \Sexpr{round(z$p.value,3)}.
+
+
+
+
+
+\newpage
+\subsection{MATH\&151 - Calculus 1}
+
+
+<<graphs151, fig.width=8, fig.height=4, echo=FALSE>>=
+makegraphs(df1, "MATH&151", 675, 700)
+@
+
+
+Student Success Rates  at the 2.0 Grade-Point Level (\%) by Entrance Exam Score:
+
+<<151table1, echo=FALSE>>=
+maketables2.0(df1, "MATH&151", 675, 700, proportions = TRUE)
+@
+
+
+<<GPAgraphs151, echo=FALSE, fig.width=8, fig.height=4>>=
+makeGPAgraphs(df1, "MATH&151", 675, 700)
+z=ttestGPA(df1, "MATH&151",675, 700)
+@
+
+The mean concurrent GPA of students who were placed by Entrance Exam is \Sexpr{round(z$estimate[1],2)}, and the mean concurrent GPA of students placed by other means is \Sexpr{round(z$estimate[2],2)}.  A T-test of the null hypothesis that the mean concurrent GPA is the same for both groups produces a P-value of \Sexpr{round(z$p.value,3)}.
+
+
+
+
+\section{Cutoff Scores}
+
+
+Because the success rates for students placed by the Entrance Exams was often higher than that for students placed by other means, a reasonable question to ask is whether those students who narrowly missed the cutoffs might have been successful as well; if so, then it might be possible to lower the cutoff scores, thus shortening the sequence of math classes necessary for students to complete their educational programs.
+
+This is a complicated question to answer because we don't know exactly how students would have performed in that circumstance.  
+
+%In the graphs below, we explore the grades of students who took a given Entrance Exam and earned scores that were slightly below the cutoff (a difference in score of up to 5 points -- the equivalent of missing one additional question).  We look at their performances in both classes -- the course they attempted to bypass as well as the one into which they attempted to place by the Entrance Exam.
+
+%There is a potential for a lot of noise in this analysis: A student who doesn't meet the necessary grade to move on to the next course in a sequence might attempt to gain entry to that course by taking an Entrance Exam, and because we do not have date information available in our data set that would allow us to distinguish these cases, they could cause some misleading results.  Furthermore, there should be some students who enrolled in classes toward the end of the period of this study, and if they eventually took their desired course after the end of this period, it will not show up in these results.  Consequently, this part of the analysis is purely exploratory.
+
+
+A promising line of reasoning is to use linear regression to try to predict the grades earned by students as a function of their Entrance Exam scores.  The plan then would be to estimate from the regression whether students achieving a score slightly lower than the current cutoff score would 
+be projected to earn a grade that is passing.  
+
+This approach would be absolutely accceptable if we knew that the grade earned is well-correlated with the Entrance Exam score, but as is visible in the scatter plots included here, that is not typically the case.  Indeed, Entrance Exams are not designed to be predictive of the grade a student will earn. Rather, they are meant to indicate whether a student has sufficient comfort with the background material to have a reasonable chance of success in a course.  In fact, in some of the regressions performed here, the correlation between Entrance Exam score and grade earned surprisingly ends up being negative.  (Perhaps unsurprisingly, those negative correlations show up when the sample sizes are very small.)
+
+On the other hand, even though the linear regression is not a perfect predictor of the grade a student will earn, our data shows that, in all of the courses studied, it is a reasonable conservative estimate.  We included histograms of the residuals for the regression models to illustrate this.  If the linear regression were a good predictor of the grade, we would expect to see these residuals be distributed normally, and they are not.  However, in most of the courses, the majority of students performed better than the regression would have predicted from their Entrance Exam score alone.
+
+Based on these results, it seems likely that the Green River College mathematics division could lower the cutoff scores slightly (by 5 points, an amount that permits one additional incorrect exam answer) for passing each of the Entrance Exams without substantial adverse effects on the success rates for students.
+
+
+
+
+
+\newpage
+\subsection{MATH062 - Arithmetic}
+
+<<makecutofftable, echo=FALSE>>=
+makeCutoffTable = function(dataframe, course, courseSuccessGrade, prereqCourse, prereqCourseSuccessGrade, cutofffloor){
+  tookMAPS = subset(dataframe, MAPS.score >= cutofffloor-5 & MAPS.score < cutofffloor)
+  tookMAPSandCourse = subset(tookMAPS, Course.taken==course)
+  tookMAPSandPrereqCourse = subset(tookMAPS, Course.taken==prereqCourse)
+  tookMAPSandSuccessfulInPrereqCourse = subset(tookMAPSandPrereqCourse, forcednumericalgrade >= prereqCourseSuccessGrade)
+  tookMAPSandSuccessfulInCourse = subset(tookMAPSandCourse, forcednumericalgrade >= courseSuccessGrade)
+  nAttemptMAPS = length(tookMAPS[,1])
+  nAttemptCourse = length(tookMAPSandCourse[,1])
+  nAttemptPrereq = length(tookMAPSandPrereqCourse[,1])
+  nSuccessfulPrereq = length(tookMAPSandSuccessfulInPrereqCourse[,1])
+  nSuccessfulCourse = length(tookMAPSandSuccessfulInCourse[,1])
+  result = c(nAttemptMAPS, nAttemptPrereq, nSuccessfulPrereq, nAttemptCourse, nSuccessfulCourse)
+  return(result)
+  }
+
+@
+
+
+<<textdisplaycutoffdata, echo=FALSE>>=
+textDisplayCutoffData = function(vector) {
+  print(paste("A) Number of students Missing Cuttoff Score by at Most 5 points:",vector[1]))
+  print(paste("B) Number of students in A who enrolled in prerequisite: ",vector[2], sep=""))
+  print(paste("C) Success Rate in B:",round(100*vector[3]/vector[2], digits=1),"%"))
+  print(paste("D) Number of students in A who eventually enrolled in course: ",vector[4], sep=""))
+  print(paste("E) Success Rate in D:",round(100*vector[5]/vector[4], digits=1),"%"))
+  }
+@
+
+<<visualdisplaycutoffdata, echo=FALSE>>=
+visualDisplayCutoffData = function(dataframe, course, courseSuccessGrade, prereqCourse, prereqCourseSuccessGrade, cutofffloor, textScale=1){
+  tookMAPS = subset(dataframe, MAPS.score >= cutofffloor-5 & MAPS.score < cutofffloor)
+  tookMAPSandCourse = subset(tookMAPS, Course.taken==course)
+  tookMAPSandPrereqCourse = subset(tookMAPS, Course.taken==prereqCourse)
+  tookMAPSandSuccessfulInPrereqCourse = subset(tookMAPSandPrereqCourse, forcednumericalgrade >= prereqCourseSuccessGrade)
+  tookMAPSandSuccessfulInCourse = subset(tookMAPSandCourse, forcednumericalgrade >= courseSuccessGrade)
+  nAttemptMAPS = length(tookMAPS[,1])
+  nAttemptCourse = length(tookMAPSandCourse[,1])
+  nAttemptPrereq = length(tookMAPSandPrereqCourse[,1])
+  nSuccessfulPrereq = length(tookMAPSandSuccessfulInPrereqCourse[,1])
+  nSuccessfulCourse = length(tookMAPSandSuccessfulInCourse[,1])
+  result = c(nAttemptMAPS, nAttemptPrereq, nSuccessfulPrereq, nAttemptCourse, nSuccessfulCourse)
+  courseSuccessRate = nSuccessfulCourse/nAttemptCourse
+  prereqSuccessRate = nSuccessfulPrereq/nAttemptPrereq
+  maxRate = max(courseSuccessRate,prereqSuccessRate)
+  minRate = min(courseSuccessRate,prereqSuccessRate)
+  vertAlign = minRate-0.1
+  if (maxRate<0.25) {vertAlign = 0.4}
+  if(minRate < 0.6 && (maxRate-minRate)>.25) {vertAlign = (maxRate+minRate+0.2)/2}
+  barplot(c(result[3]/result[2], result[5]/result[4]), col = c("lightblue", "yellow"), main = paste(nAttemptMAPS," Students Narrowly Missed Cutoff For ",course," Entrance Exam", sep=""), ylim = c(0,1))
+  axis(1, at = 1:2, labels = c(paste("Success Rate in ", prereqCourse, sep=""), paste("Success Rate in ", course, sep="")))
+  text(0.7,vertAlign,paste("N=", nAttemptPrereq," Students", sep=""),cex=textScale)
+  text(0.7,vertAlign-0.1,paste("Attempted ", prereqCourse, sep=""),cex=textScale)
+  text(0.7, vertAlign-0.2, paste("Success Rate (",prereqCourseSuccessGrade,"): ", round(100*prereqSuccessRate, digits=1),"%",sep=""),cex=textScale)
+  text(1.9,vertAlign,paste("N=", nAttemptCourse," Students Eventually", sep=""),cex=textScale)
+  text(1.9,vertAlign-0.1,paste("Attempted ", course, sep=""),cex=textScale)
+  text(1.9, vertAlign-0.2, paste("Success Rate (", courseSuccessGrade,"): ", round(100*courseSuccessRate, digits=1),"%",sep=""),cex=textScale)
+  }
+@
+
+
+
+
+
+<<cutoffRegressionGraph, echo=FALSE>>=
+cutoffRegressionAnalysisGraph = function(dataframe, course, cutoffFloor, cutoffCeiling, legendHorizontal, legendVertical, passingGrade = 2.0, altPassingGrade = NULL){
+  tookCourse = subset(dataframe, Course.taken==course)
+  qualifiedByMAPS = subset(tookCourse, MAPS.score >= cutoffFloor & MAPS.score < cutoffCeiling)
+  N = length(qualifiedByMAPS[,1])
+  y = qualifiedByMAPS$numericalgrade
+  x = qualifiedByMAPS$MAPS.score
+  plot(x,y,pch=19, col="blue", cex=1.5,
+       xlab=paste("Entrance Exam Score"), 
+       ylab=paste("Grade in ",course,sep=""), 
+       main=paste("Predicting ",course," Grade from Entrance \n Exam Score by Regression (N=",N,")",sep=""))
+  fit =lm(y~x)
+  abline(fit, lwd=3, col="red")
+  abline(passingGrade, 0, lwd = 2, col = "green", lty = 2)
+  if (!is.null(altPassingGrade)){
+    abline(altPassingGrade, 0, lwd = 2, col = "green", lty = 4)
+    legendText = c("Regression","Passing Level 2", "Passing Level 1")
+    legendLTY = c(1,2,4)
+    legendColors = c("red","green","green")
+  } else {
+    legendText = c("Regression", "Passing Level")
+    legendLTY = c(1,2)
+    legendColors = c("red","green")
+  }
+  legend(legendHorizontal, legendVertical, legendText, lty = legendLTY, lwd = 2, col = legendColors)
+  gradePrediction = predict(fit, data.frame(x=c(cutoffFloor-5)))
+  return(gradePrediction)
+}
+@
+
+<<cutoffresidualsgraph, echo=FALSE>>=
+cutoffResiduals = function(dataframe, course, cutoffFloor, cutoffCeiling){
+  tookCourse = subset(dataframe, Course.taken==course)
+  qualifiedByMAPS = subset(tookCourse, MAPS.score >= cutoffFloor & MAPS.score < cutoffCeiling)
+  fit = lm(qualifiedByMAPS$numericalgrade~qualifiedByMAPS$MAPS.score)
+  #qqnorm(resid(fit))
+  #abline(0,1)
+  hist(resid(fit), main="Histogram of Residuals", xlab = "Actual Grade Earned Minus Predicted Grade", col="yellow")
+}
+@
+
+
+<<062regressiongraph, echo=FALSE, fig.height=4>>=
+prediction062 = cutoffRegressionAnalysisGraph(df1, "MATH062", 80, 100, 91, 3.9, 2.5)
+@
+
+
+<<062nearmisses, echo=FALSE>>=
+nearMissesFor062 = length(subset(df1, MAPS.score >= 75 & MAPS.score < 80)[,1])
+@
+
+<<062residualsplot, echo=FALSE, fig.height=4>>=
+cutoffResiduals(df1, "MATH062", 80, 100)
+@
+
+%There were \Sexpr{nearMissesFor062} students who were within 5 points of passing the Entrance Exam for gaining admittance to MATH062.  Students who are not eligible for MATH062 (Arithmetic) may enroll in an Adult Basic Education course (ABE053); passing that course gives students eligibility for MATH062.  Grade data for the ABE course was not included in this study. 
+
+The regression line predicts a grade of \Sexpr{round(prediction062,1)} for a student earning an Entrance Exam score that is 5 points lower than the current cutoff.  The negative slope of this line is likely due to the small sample size and the presence of a single outlier on the bottom right.
+
+
+\newpage
+\subsection{MATH070 - Prealgebra}
+
+%<<070cutoff, echo=FALSE, fig.height=4>>=
+%visualDisplayCutoffData(df1, "MATH070", 2.5, "MATH062", 2.5, 180)
+%@
+
+<<070regressiongraph, echo=FALSE, fig.height=4>>=
+prediction070 = cutoffRegressionAnalysisGraph(df1, "MATH070", 180, 200, 190, 2.0, 2.5)
+@
+
+<<070residualsplot, echo=FALSE, fig.height=4>>=
+cutoffResiduals(df1, "MATH070", 180, 200)
+@
+
+The regression line predicts a grade of \Sexpr{round(prediction070,1)} for a student earning an Entrance Exam score that is 5 points lower than the current cutoff.
+
+
+
+\newpage
+\subsection{MATH072 - Elementary Algebra}
+
+%<<072cutoff, echo=FALSE, fig.height=4>>=
+%visualDisplayCutoffData(df1, "MATH072", 2.5, "MATH070", 2.5, 280)
+%@
+
+<<072regressiongraph, echo=FALSE, fig.height=4>>=
+prediction072 = cutoffRegressionAnalysisGraph(df1, "MATH072", 280, 300, 291, 2.0, 2.5)
+@
+
+<<072residualsplot, echo=FALSE, fig.height=4>>=
+cutoffResiduals(df1, "MATH072", 280, 300)
+@
+
+The regression line predicts a grade of \Sexpr{round(prediction072,1)} for a student earning an Entrance Exam score that is 5 points lower than the current cutoff.
+
+
+
+\newpage
+\subsection{MATH097 - Intermediate Algebra}
+
+%<<097cutoff, echo=FALSE, fig.height=4>>=
+%visualDisplayCutoffData(df1, "MATH097", 2.5, "MATH072", 2.5, 380, textScale = 0.75)
+%
+%visualDisplayCutoffData(df1, "MATH097", 2.0, "MATH072", 2.5, 380, textScale = 0.75)
+%@
+
+<<097regressiongraph, echo=FALSE, fig.height=4>>=
+prediction097 = cutoffRegressionAnalysisGraph(df1, "MATH097", 380, 400, 393, 1.8, 2.5, 2.0)
+@
+
+<<097residualsplot, echo=FALSE, fig.height=4>>=
+cutoffResiduals(df1, "MATH097", 380, 400)
+@
+
+The regression line predicts a grade of \Sexpr{round(prediction097,1)} for a student earning an Entrance Exam score that is 5 points lower than the current cutoff.
+
+
+\newpage
+\subsection{MATH\&107 - Math in Society}
+
+
+%<<107cutoff, echo=FALSE, fig.height=4>>=
+%visualDisplayCutoffData(df1, "MATH&107", 1.0, "MATH097", 2.0, 475)
+%@
+
+<<107regressiongraph, echo=FALSE, fig.height=4>>=
+prediction107 = cutoffRegressionAnalysisGraph(df1, "MATH&107", 475, 500, 485, 3.9, 1.0)
+@
+
+<<107residualsplot, echo=FALSE, fig.height=4>>=
+cutoffResiduals(df1, "MATH&107", 475, 500)
+@
+
+The regression line predicts a grade of \Sexpr{round(prediction107,1)} for a student earning an Entrance Exam score that is 5 points lower than the current cutoff.  Of course, the maximum possible grade is  4.0.  The negative slope of this line is likely due to the small sample size and the presence of a single outlier on the bottom right.
+
+\newpage
+\subsection{MATH\&147 - Finite Math for Business and Social Science}
+
+
+%<<147cutoff, echo=FALSE, fig.height=4>>=
+%visualDisplayCutoffData(df1, "MATH147", 2.0, "MATH097", 2.0, 475, textScale = 0.75)
+%
+%visualDisplayCutoffData(df1, "MATH147", 1.0, "MATH097", 2.0, 475, textScale = 0.75)
+%@
+
+<<147regressiongraph, echo=FALSE, fig.height=4>>=
+prediction147 = cutoffRegressionAnalysisGraph(df1, "MATH147", 475, 500, 487, 3.5, 2.0, 1.0)
+@
+
+<<147residualsplot, echo=FALSE, fig.height=4>>=
+cutoffResiduals(df1, "MATH147", 475, 500)
+@
+
+The regression line predicts a grade of \Sexpr{round(prediction147,1)} for a student earning an Entrance Exam score that is 5 points lower than the current cutoff.
+
+
+\newpage
+\subsection{MATH\&141 - Precalculus 1}
+
+
+%<<141cutoff, echo=FALSE, fig.height=4>>=
+%visualDisplayCutoffData(df1, "MATH&141", 2.0, "MATH097", 2.5, 480, textScale=0.75)
+%
+%visualDisplayCutoffData(df1, "MATH&141", 1.0, "MATH097", 2.5, 480, textScale = 0.75)
+%@
+
+
+<<141regressiongraph, echo=FALSE, fig.height=4>>=
+prediction141 = cutoffRegressionAnalysisGraph(df1, "MATH&141", 480, 500, 486, 1.7, 2.0, 1.0)
+@
+
+<<141residualsplot, echo=FALSE, fig.height=4>>=
+cutoffResiduals(df1, "MATH&141", 480, 500)
+@
+
+The regression line predicts a grade of \Sexpr{round(prediction141,1)} for a student earning an Entrance Exam score that is 5 points lower than the current cutoff.
+
+
+\newpage
+\subsection{MATH\&142 - Precalculus 2}
+
+
+%<<142cutoff, echo=FALSE, fig.height=4>>=
+%visualDisplayCutoffData(df1, "MATH&142", 2.9, "MATH&141", 2.0, 575)
+%@
+
+
+<<142regressiongraph, echo=FALSE, fig.height=4>>=
+prediction142 = cutoffRegressionAnalysisGraph(df1, "MATH&142", 575, 600, 577, 1.7, 2.0)
+@
+
+<<142residualsplot, echo=FALSE, fig.height=4>>=
+cutoffResiduals(df1, "MATH&142", 575, 600)
+@
+
+The regression line predicts a grade of \Sexpr{round(prediction142,1)} for a student earning an Entrance Exam score that is 5 points lower than the current cutoff.  Of course, the maximum possible grade is 4.0.  The negative slope of this line is likely due to the small sample size and the presence of a single outlier on the bottom right.
+
+
+\newpage
+\subsection{MATH\&151, Calculus 1}
+
+
+%<<151cutoff, echo=FALSE, fig.height=4>>=
+%visualDisplayCutoffData(df1, "MATH&151", 2.0, "MATH&142", 2.0, 675)
+%@
+
+<<151regressiongraph, echo=FALSE, fig.height=4>>=
+prediction151 = cutoffRegressionAnalysisGraph(df1, "MATH&151", 675, 700, 681, 1.7, 2.0)
+@
+
+<<151residualsplot, echo=FALSE, fig.height=4>>=
+cutoffResiduals(df1, "MATH&151", 675, 700)
+@
+
+The regression line predicts a grade of \Sexpr{round(prediction151,1)} for a student earning an Entrance Exam score that is 5 points lower than the current cutoff.
+
+
+
+\newpage
+\section{Codebook}
+
+The following information describes the data fields in the ``anonymousdata.csv'' file from which the analysis in this report begins.
+
+
+\begin{itemize}
+\item {\bf X} and {\bf X.1} - These are line numbers for the table and convey no other information.
+
+
+\item {\bf Course.taken} - Indicates the math course: MATH062 is Arithmetic, MATH070 is Prealgebra, MATH072 is Elementary Algebra, MATH097 is Intermediate Algebra, MATH\&107 is Math in Society, MATH147 is Finite Math for Business and Social Science, MATH\&141 is Precalculus 1, MATH\&142 is Precalculus 2, and MATH\&151 is Calculus 1.
+
+\item {\bf Quarter} - Indicates the quarter in which the course was taken.  The first two digits indicate the acemic year: 01 is 2010-2011, 12 is 2011-2012, 23 is 2012-2013, and 34 is 2013-2014.  The final digit indicates the quarter: 1 is summr, 2 is fall, 3 is winter, and 4 is spring.
+
+\item {\bf Grade.earned} - This is the grade reported on the students' transcript.  Grades are awarded on a scale of 0.0-4.0.  I is Incomplete, N is Audit, NC is No Credit, P is Pass, and W is Withdrawal.
+
+
+\item {\bf numericalgrade} - This is the same as Grade.earned when the assigned grade is a number in the range 0.0-4.0, and it NA otherwise.
+
+\item {\bf Last.quarter.of.attendance} - Indicates the last quarter during which the student was enrolled; z999 indicates that the student was still enrolled at the time of data collection.
+
+\item {\bf Drop.date} - If the student dropped the course after the 4th day of the quarter, this indicates the date of the withdrawal.
+
+\item {\bf Concurrent.GPA} - Indicates the GPA earned during Quarter, including the grade earned in the math course.
+
+\item {\bf Concurrent.credits.registered.for} - Indicates how many credits a student was registered for during Quarter.
+
+\item {\bf Concurrent.credits.earned} - Indicates how many credits student successfully earned during Quarter.
+
+\item {\bf COMPASS.Reading} - Reading score on COMPASS placement exam.
+
+\item {\bf COMPASS.Number.Skills} - Number Skills score on COMPASS placement exam.
+
+\item {\bf COMPASS.Elem.Alg} - Elementary Algebra score on COMPASS placement exam.
+
+\item {\bf COMPASS.College.Alg.} - College Algebra score on COMPASS placement exam.
+
+\item {\bf COMPASS.Trig} - Trigonometry score on COMPASS placement exam.
+
+\item {\bf MAPS.Score} - Score on Entrance Exam.  The range of the score indicates which exam was attempted: 0-99 indicates that the student tried to test into MATH062 (80 or higher is passing); 100-199 indicates MATH070 (180 or higher is passing), 200-299 indicates MATH072 (280 or higher is passing), 300-399 indicates MATH097 (380 or higher is passing), 400-499 indicates MATH\&107, MATH\&141, or MATH147 (475 or higher is passing for MATH\&107 and MATH147, while 480 or higher is passing for MATH\&141); 500-599 indicates MATH\&142 (575 or higher is passing); 600-699 indicates MATH\&151 (675 or higher is passing).
+
+\item {\bf FID} - Stands for ``Fake ID'', which is a surrogate for the SID (``Student ID'') number which cannot be released to the public because of federal privacy laws.  Two entries in the table will have the same FID number if and only if they correspond to the same student.
+\end{itemize}
+
+
+
+
+
+
+\section{Code and Data}
+
+The raw data for this analysis included student identification numbers, or SIDs, which cannot be released to the public due to privacy laws.  Therefore, the publicly-available version of this data has had these SIDs stripped and replaced by randomly-generated fake identification numbers (labeled FID in the cleaned data set).  Here is the code that was used for this pre-processing stage:
+
+
+<<codeanddata, eval=FALSE, echo=TRUE>>=
+df1 = read.csv("rawdata/startingData.csv")
+df1 = subset(df1, Grade.earned != "*")
+SID = unique(df1$SID.)
+FID = 1:length(SID)
+set.seed(2014)
+FID = sample(FID)
+SIDtoFID=cbind(SID,FID)
+write.csv(SIDtoFID,"cleandata/SIDtranslationtable.csv")
+translator = read.csv("cleandata/SIDtranslationtable.csv")
+df1$FID = numeric(length(df1$SID.))
+for (k in 1:length(df1$SID.)){
+  tableentry = match(df1$SID.[k],translator[,2])
+  df1$FID[k] = translator[tableentry,3]
+}
+df1$SID. = NULL
+df1$Last.Name = NULL
+df1$First.Name = NULL
+df1$Date.of.Birth = NULL
+df1$Sex = NULL
+df1$Ethnicity = NULL
+write.csv(df1, "cleandata/anonymousdata.csv")
+@
+
+The second line in the code above removes the entries from the data set for which no grade was recorded (there was only one such entry in the entire study).
+
+Two additional preprocessing steps were applied to the data.  First, three columns were added to the data frame to indicate student success at the 1.0, 2.0 and 2.5 grade-point levels.  Second, another column was added in which non-numerical grades were given numerical representations, to facilitate generating some of the graphs found in this report.  The code for that stage of preprocessing is:
+
+<<preprocessing, eval=FALSE>>=
+df1$success1.0 = logical(length(df1$FID))
+df1$success1.0[df1$numericalgrade >= 1.0] = TRUE
+df1$success1.0[df1$Grade.earned == "P"] = TRUE
+
+df1$success2.0 = logical(length(df1$FID))
+df1$success2.0[df1$numericalgrade >= 2.0] = TRUE
+
+df1$success2.5 = logical(length(df1$FID))
+df1$success2.5[df1$numericalgrade >= 2.5] = TRUE
+
+df1$forcednumericalgrade = df1$numericalgrade
+df1$forcednumericalgrade[df1$Grade.earned == "W"] = -0.1
+df1$forcednumericalgrade[df1$Grade.earned == "N"] = -0.1
+df1$forcednumericalgrade[df1$Grade.earned == "P"] = 1
+df1$forcednumericalgrade[df1$Grade.earned == "NC"] = -0.1
+df1$forcednumericalgrade[df1$Grade.earned == "I"] = -0.1
+
+
+write.csv(df1, "cleandata/preprocessedData.csv")
+@
+
+
+
+
+
+
+All code, including the code used to generate this document, can be found on GitHub at \\https://github.com/kriskissel.  The data files ``anonymousdata.csv'' and ``preprocessedData.csv'' can also be found there.
+
+
+
+
+
+
+
+
+\end{document}
